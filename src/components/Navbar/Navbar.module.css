@@ -1,0 +1,193 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-nav-bg);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+    /* Subtle gold border */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.logoImage {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.logoImage.zoomed {
+    transform: scale(1.5) !important;
+}
+
+.logoContainer a {
+    display: block;
+}
+
+.logoContainer a:hover .logoImage {
+    transform: scale(1.1);
+}
+
+.logoContainer a:active .logoImage {
+    transform: scale(1.15);
+    /* Even bigger on click per request */
+}
+
+.navLinks {
+    display: flex;
+    gap: 1.5rem;
+    /* Adjusted for desktop elegance */
+    list-style: none;
+    align-items: center;
+}
+
+.navLink {
+    color: var(--color-nav-text);
+    font-family: var(--font-outfit);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    position: relative;
+    text-decoration: none;
+}
+
+.navLink:hover {
+    color: var(--color-secondary);
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--color-secondary);
+    transition: width 0.3s ease;
+}
+
+.navLink:hover::after {
+    width: 100%;
+}
+
+.mobileMenuBtn {
+    display: none;
+    /* Hidden on desktop */
+}
+
+.mobileMenu {
+    display: none;
+    /* Hidden on desktop */
+}
+
+/* ... (Keep original .navLink and .mobileMenuBtn base styles) */
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .navLinks {
+        display: none;
+        /* Hide desktop menu on mobile */
+    }
+
+    .mobileMenu {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: 0;
+        /* Base at 0, let motion handle the offset */
+        width: 100%;
+        /* Cover almost full screen for artistic look */
+        max-width: 300px;
+        height: 100vh;
+        background-color: #000000;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        gap: 2.5rem;
+        z-index: 10000;
+        box-shadow: -15px 0 35px rgba(0, 0, 0, 0.9);
+        overflow-y: auto;
+    }
+
+    .navLink {
+        font-family: var(--font-playfair);
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        transition: all 0.4s ease;
+        position: relative;
+        letter-spacing: 1px;
+    }
+
+    /* Artistic Gold Hover Effect */
+    .navLink:hover,
+    .navLink:active {
+        color: var(--color-secondary) !important;
+        transform: scale(1.1);
+        text-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+    }
+
+    .navLink::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 1px;
+        background: var(--color-secondary);
+        transition: all 0.4s ease;
+        transform: translateX(-50%);
+    }
+
+    .navLink:hover::after {
+        width: 80%;
+    }
+
+    .mobileMenuBtn {
+        display: block;
+        position: relative;
+        z-index: 10001;
+        color: #ffffff !important;
+        background: transparent;
+        border: 1px solid var(--color-secondary);
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    /* Side Menu Backdrop */
+    .navbar::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+    }
+
+    .navbar.menuOpen::after {
+        opacity: 1;
+        visibility: visible;
+    }
+}
