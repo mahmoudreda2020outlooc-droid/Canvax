@@ -14,8 +14,6 @@ export async function submitOrder(orderData: any) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            // Note: Google Scripts don't support CORS for direct POST from browser easily, 
-            // but from server it's a standard request.
         });
 
         return { success: true };

@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CanVax | Premium Art Prints
 
-## Getting Started
+A premium, high-end art gallery web application designed for showcasing and selling exclusive art prints. Built with speed, security, and a luxury aesthetic in mind.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Artistic Showcase**: Beautiful, responsive gallery with high-resolution imagery and elegant transitions.
+- **Multilingual Support**: Full support for English and Arabic (RTL) with a seamless toggle.
+- **Side Drawer Navigation**: Premium mobile side menu with staggered animations and gold accents.
+- **Chic Dark Mode**: A luxury black & gold aesthetic available across the entire platform.
+- **Secure Ordering**: Fully secured server-side order processing via Next.js Server Actions.
+- **SEO Optimized**: Built with standard web best practices for search engine visibility.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Technology Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Styling**: Vanilla CSS Modules (Custom Design System)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **State Management**: React Context API
+- **Language Management**: Custom RTL/LTR Integration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Live Demo
 
-## Learn More
+[Visit CanVax Live](https://canvax-5xdo.vercel.app/)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Designed & Developed by Mahmoud Reda*

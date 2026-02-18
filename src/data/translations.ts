@@ -73,7 +73,7 @@ export const translations = {
                 location_value: 'Nasr City, Cairo, Egypt',
                 phone1: '01004897420',
                 phone2: '01226550225',
-                email_value: 'canvaxart@gmail.com', // Updated to a more realistic placeholder or user preferred
+                email_value: 'canvaxart@gmail.com',
                 form_name: 'Your Name',
                 form_email: 'Your Email',
                 form_message: 'Message',
