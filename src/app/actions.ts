@@ -3,8 +3,8 @@
 export async function submitOrder(orderData: any) {
     const url = process.env.ORDER_SCRIPT_URL;
     if (!url) {
-        console.error("ORDER_SCRIPT_URL is not defined in environment variables");
-        return { success: false, error: "Configuration error" };
+        console.error("ORDER_SCRIPT_URL is missing");
+        return { success: false, error: "Env var missing" };
     }
 
     try {
@@ -12,47 +12,41 @@ export async function submitOrder(orderData: any) {
             method: 'POST',
             body: JSON.stringify(orderData),
             headers: {
-                'Content-Type': 'application/json'
+                // Using text/plain can sometimes help with Google Script POST issues
+                'Content-Type': 'text/plain;charset=utf-8'
             },
-            // Google Apps Script can sometimes be slow or require redirects
+            redirect: 'follow',
             cache: 'no-store'
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
         return { success: true };
     } catch (error) {
-        console.error("Server action order submission failed:", error);
-        return { success: false, error: "Failed to submit order" };
+        console.error("Order submission error:", error);
+        return { success: false };
     }
 }
 
 export async function submitContact(contactData: { name: string; email: string; message: string }) {
     const url = process.env.CONTACT_SCRIPT_URL;
     if (!url) {
-        console.error("CONTACT_SCRIPT_URL is not defined in environment variables");
-        return { success: false, error: "Configuration error" };
+        console.error("CONTACT_SCRIPT_URL is missing");
+        return { success: false, error: "Env var missing" };
     }
 
     try {
-        const response = await fetch(url, {
+        await fetch(url, {
             method: 'POST',
             body: JSON.stringify(contactData),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'text/plain;charset=utf-8'
             },
+            redirect: 'follow',
             cache: 'no-store'
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
         return { success: true };
     } catch (error) {
-        console.error("Server action contact submission failed:", error);
-        return { success: false, error: "Failed to submit message" };
+        console.error("Contact submission error:", error);
+        return { success: false };
     }
 }
