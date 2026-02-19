@@ -49,7 +49,11 @@ export default function Cart() {
             notes: formData.notes
         };
 
-        await submitOrder(orderData);
+        // 1. Sync to Google Sheets (Secure Server Action)
+        const result = await submitOrder(orderData);
+        if (!result.success) {
+            alert(`خطأ في إرسال الطلب لجوجل شيت: ${result.error}`);
+        }
 
         // Short delay for visual feedback
         await new Promise(resolve => setTimeout(resolve, 300));

@@ -4,11 +4,9 @@ export async function submitOrder(orderData: any) {
     const url = process.env.ORDER_SCRIPT_URL;
 
     if (!url) {
-        console.error("DEBUG: ORDER_SCRIPT_URL is MISSING in environment variables.");
-        return { success: false, error: "Env var missing" };
+        console.error("DEBUG: ORDER_SCRIPT_URL is MISSING.");
+        return { success: false, error: "Missing ORDER_SCRIPT_URL in Vercel settings" };
     }
-
-    console.log(`DEBUG: Attempting to send order to Google Sheets. URL exists.`);
 
     try {
         const response = await fetch(url, {
@@ -22,19 +20,14 @@ export async function submitOrder(orderData: any) {
             cache: 'no-store'
         });
 
-        console.log(`DEBUG: Order response status: ${response.status}`);
-
         if (response.ok) {
-            console.log("DEBUG: Order successfully sent to Google Sheets.");
             return { success: true };
         } else {
-            const errorText = await response.text();
-            console.error(`DEBUG: Google Sheets Error Response: ${errorText}`);
-            return { success: false, error: `HTTP ${response.status}` };
+            return { success: false, error: `Google Script Error: ${response.status}` };
         }
-    } catch (error) {
-        console.error("DEBUG: Fatal error during order submission:", error);
-        return { success: false, error: "Network or Server error" };
+    } catch (error: any) {
+        console.error("DEBUG: Fetch error:", error);
+        return { success: false, error: error.message || "Network Error" };
     }
 }
 
@@ -42,11 +35,9 @@ export async function submitContact(contactData: { name: string; email: string; 
     const url = process.env.CONTACT_SCRIPT_URL;
 
     if (!url) {
-        console.error("DEBUG: CONTACT_SCRIPT_URL is MISSING in environment variables.");
-        return { success: false, error: "Env var missing" };
+        console.error("DEBUG: CONTACT_SCRIPT_URL is MISSING.");
+        return { success: false, error: "Missing CONTACT_SCRIPT_URL in Vercel settings" };
     }
-
-    console.log(`DEBUG: Attempting to send contact data to Google Sheets. URL exists.`);
 
     try {
         const response = await fetch(url, {
@@ -60,17 +51,13 @@ export async function submitContact(contactData: { name: string; email: string; 
             cache: 'no-store'
         });
 
-        console.log(`DEBUG: Contact response status: ${response.status}`);
-
         if (response.ok) {
-            console.log("DEBUG: Contact data successfully sent to Google Sheets.");
             return { success: true };
         } else {
-            console.error(`DEBUG: Google Sheets Contact Error: ${response.status}`);
-            return { success: false };
+            return { success: false, error: `Google Script Error: ${response.status}` };
         }
-    } catch (error) {
-        console.error("DEBUG: Fatal error during contact submission:", error);
-        return { success: false };
+    } catch (error: any) {
+        console.error("DEBUG: Fetch error:", error);
+        return { success: false, error: error.message || "Network Error" };
     }
 }
