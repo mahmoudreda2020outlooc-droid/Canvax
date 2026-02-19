@@ -175,7 +175,14 @@ export default function AboutSection() {
                         ].map((feature, index) => (
                             <motion.div
                                 key={index}
-                                style={{ padding: '1rem', textAlign: 'center' }}
+                                style={{
+                                    padding: '1rem',
+                                    textAlign: 'center',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -204,7 +211,13 @@ export default function AboutSection() {
                                 }}>
                                     {feature.title}
                                 </h3>
-                                <p style={{ opacity: 0.9, lineHeight: 1.6, textAlign: 'center' }}>{feature.text}</p>
+                                <p style={{
+                                    opacity: 0.9,
+                                    lineHeight: 1.6,
+                                    textAlign: 'center',
+                                    maxWidth: '300px',
+                                    margin: '0 auto'
+                                }}>{feature.text}</p>
                             </motion.div>
                         ))}
                     </div>
