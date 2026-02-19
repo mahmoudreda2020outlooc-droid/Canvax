@@ -50,10 +50,7 @@ export default function Cart() {
         };
 
         // 1. Sync to Google Sheets (Secure Server Action)
-        const result = await submitOrder(orderData);
-        if (!result.success) {
-            alert(`خطأ في إرسال الطلب لجوجل شيت: ${result.error}`);
-        }
+        await submitOrder(orderData);
 
         // Short delay for visual feedback
         await new Promise(resolve => setTimeout(resolve, 300));

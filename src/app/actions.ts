@@ -4,12 +4,12 @@ export async function submitOrder(orderData: any) {
     const url = process.env.ORDER_SCRIPT_URL;
 
     if (!url) {
-        console.error("DEBUG: ORDER_SCRIPT_URL is MISSING.");
-        return { success: false, error: "Missing ORDER_SCRIPT_URL in Vercel settings" };
+        console.error("ORDER_SCRIPT_URL is MISSING.");
+        return { success: false };
     }
 
     try {
-        const response = await fetch(url, {
+        await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -19,15 +19,10 @@ export async function submitOrder(orderData: any) {
             redirect: 'follow',
             cache: 'no-store'
         });
-
-        if (response.ok) {
-            return { success: true };
-        } else {
-            return { success: false, error: `Google Script Error: ${response.status}` };
-        }
+        return { success: true };
     } catch (error: any) {
-        console.error("DEBUG: Fetch error:", error);
-        return { success: false, error: error.message || "Network Error" };
+        console.error("Fetch error during order submission:", error);
+        return { success: false };
     }
 }
 
@@ -35,12 +30,12 @@ export async function submitContact(contactData: { name: string; email: string; 
     const url = process.env.CONTACT_SCRIPT_URL;
 
     if (!url) {
-        console.error("DEBUG: CONTACT_SCRIPT_URL is MISSING.");
-        return { success: false, error: "Missing CONTACT_SCRIPT_URL in Vercel settings" };
+        console.error("CONTACT_SCRIPT_URL is MISSING.");
+        return { success: false };
     }
 
     try {
-        const response = await fetch(url, {
+        await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,14 +45,9 @@ export async function submitContact(contactData: { name: string; email: string; 
             redirect: 'follow',
             cache: 'no-store'
         });
-
-        if (response.ok) {
-            return { success: true };
-        } else {
-            return { success: false, error: `Google Script Error: ${response.status}` };
-        }
+        return { success: true };
     } catch (error: any) {
-        console.error("DEBUG: Fetch error:", error);
-        return { success: false, error: error.message || "Network Error" };
+        console.error("Fetch error during contact submission:", error);
+        return { success: false };
     }
 }

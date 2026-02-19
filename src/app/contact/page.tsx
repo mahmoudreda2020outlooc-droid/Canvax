@@ -86,10 +86,7 @@ export default function Contact() {
                         const message = formData.get('message') as string;
 
                         // 1. Sync to Google Sheets (Secure Server Action)
-                        const result = await submitContact({ name, email, message });
-                        if (!result.success) {
-                            alert(`خطأ في إرسال البيانات لجوجل شيت: ${result.error}`);
-                        }
+                        await submitContact({ name, email, message });
 
                         // Short delay for visual feedback
                         await new Promise(resolve => setTimeout(resolve, 300));
