@@ -49,7 +49,7 @@ export default function Cart() {
             notes: formData.notes
         };
 
-        submitOrder(orderData);
+        await submitOrder(orderData);
 
         // Short delay for visual feedback
         await new Promise(resolve => setTimeout(resolve, 300));

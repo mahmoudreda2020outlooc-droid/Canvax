@@ -3,7 +3,7 @@
 export async function submitOrder(orderData: any) {
     const url = process.env.ORDER_SCRIPT_URL;
     if (!url) {
-        console.error("Order script URL is not defined");
+        console.error("ORDER_SCRIPT_URL is not defined in environment variables");
         return { success: false, error: "Configuration error" };
     }
 
@@ -14,7 +14,13 @@ export async function submitOrder(orderData: any) {
             headers: {
                 'Content-Type': 'application/json'
             },
+            // Google Apps Script can sometimes be slow or require redirects
+            cache: 'no-store'
         });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
         return { success: true };
     } catch (error) {
@@ -26,18 +32,24 @@ export async function submitOrder(orderData: any) {
 export async function submitContact(contactData: { name: string; email: string; message: string }) {
     const url = process.env.CONTACT_SCRIPT_URL;
     if (!url) {
-        console.error("Contact script URL is not defined");
+        console.error("CONTACT_SCRIPT_URL is not defined in environment variables");
         return { success: false, error: "Configuration error" };
     }
 
     try {
-        await fetch(url, {
+        const response = await fetch(url, {
             method: 'POST',
             body: JSON.stringify(contactData),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            cache: 'no-store'
         });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         return { success: true };
     } catch (error) {
         console.error("Server action contact submission failed:", error);
