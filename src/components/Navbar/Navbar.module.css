@@ -18,28 +18,33 @@
     align-items: center;
 }
 
-.logoImage {
-    height: 50px;
-    width: auto;
-    object-fit: contain;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.logoImage.zoomed {
-    transform: scale(1.5) !important;
+.logoText {
+    font-family: var(--font-playfair);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--color-secondary) 0%, #D4AF37 50%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
 .logoContainer a {
+    text-decoration: none;
     display: block;
 }
 
-.logoContainer a:hover .logoImage {
-    transform: scale(1.1);
+.logoContainer a:hover .logoText {
+    transform: scale(1.05);
+    filter: brightness(1.2);
 }
 
-.logoContainer a:active .logoImage {
-    transform: scale(1.15);
-    /* Even bigger on click per request */
+.logoContainer a:active .logoText {
+    transform: scale(1.08);
 }
 
 .navLinks {

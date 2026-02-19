@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+// Removed Image import as it's no longer used for the logo
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/context/CartContext';
 import { useLanguage } from '@/context/LanguageContext';
@@ -25,27 +25,12 @@ export default function Navbar() {
         setIsOpen(!isOpen);
     };
 
-
-    const [isLogoZoomed, setIsLogoZoomed] = useState(false);
-
-    const handleLogoClick = (e: React.MouseEvent) => {
-        e.preventDefault();
-        setIsLogoZoomed(true);
-    };
-
     return (
         <>
             <nav className={`${styles.navbar} ${isOpen ? styles.menuOpen : ''}`}>
                 <div className={styles.logoContainer}>
-                    <Link href="/" onClick={handleLogoClick}>
-                        <Image
-                            src="/logo.png"
-                            alt="CanVax Logo"
-                            width={150}
-                            height={50}
-                            className={styles.logoImage}
-                            priority
-                        />
+                    <Link href="/">
+                        <span className={styles.logoText}>CanVax</span>
                     </Link>
                 </div>
 
@@ -290,38 +275,6 @@ export default function Navbar() {
                     </li>
                 </ul>
             </nav>
-
-            {/* Logo Modal Overlay */}
-            {isLogoZoomed && (
-                <div
-                    onClick={() => setIsLogoZoomed(false)}
-                    style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        backgroundColor: 'rgba(0,0,0,0.85)',
-                        backdropFilter: 'blur(5px)',
-                        zIndex: 1000,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'zoom-out',
-                        animation: 'fadeIn 0.3s ease'
-                    }}
-                >
-                    <div style={{ position: 'relative', width: '80vw', height: '80vh' }}>
-                        <Image
-                            src="/logo.png"
-                            alt="CanVax Logo Large"
-                            fill
-                            style={{ objectFit: 'contain' }}
-                            priority
-                        />
-                    </div>
-                </div>
-            )}
         </>
     );
 }
